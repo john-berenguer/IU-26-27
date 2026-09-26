@@ -1,4 +1,4 @@
-class persona extends Validations {
+class Persona extends Validations {
 	constructor(esTest) {
 		super();
 		this.dom = new dom();
@@ -136,6 +136,50 @@ class persona extends Validations {
 		return true;
 	}
 
+	ADD_apellidos_persona_validation() {
+		if (!this.min_size("apellidos_persona", 2)) {
+			this.dom.mostrar_error_campo(
+				"apellidos_persona",
+				"apellidos_persona_min_size_ko",
+			);
+			return "apellidos_persona_min_size_ko";
+		}
+		if (!this.max_size("apellidos_persona", 45)) {
+			this.dom.mostrar_error_campo(
+				"apellidos_persona",
+				"apellidos_persona_max_size_ko",
+			);
+			return "apellidos_persona_max_size_ko";
+		}
+		// allowed format aA to zZ letter
+		if (!this.format("apellidos_persona", "^[A-Za-z]*$")) {
+			this.dom.mostrar_error_campo(
+				"apellidos_persona",
+				"apellidos_persona_format_ko",
+			);
+			return "apellidos_persona_format_ko";
+		}
+		this.dom.mostrar_exito_campo("apellidos_persona");
+		return true;
+	}
+
+	//TODO
+	ADD_fechaNacimiento_persona_validation() {
+		return true;
+	}
+
+	ADD_direccion_persona_validation() {
+		return true;
+	}
+
+	ADD_telefono_persona_validation() {
+		return true;
+	}
+
+	ADD_email_persona_validation() {
+		return true;
+	}
+
 	ADD_nuevo_foto_persona_validation() {
 		if (!this.exist_file("nuevo_foto_persona")) {
 			this.dom.mostrar_error_campo(
@@ -182,6 +226,7 @@ class persona extends Validations {
 		// store in key (id element) value (result of field validation method)
 		set_result.dni = this.ADD_dni_validation();
 		set_result.nombre_persona = this.ADD_nombre_persona_validation();
+		set_result.apellidos_persona = this.ADD_apellidos_persona_validation();
 		set_result.nuevo_foto_persona =
 			this.ADD_nuevo_foto_persona_validation();
 
@@ -189,6 +234,7 @@ class persona extends Validations {
 		let result =
 			set_result.dni &
 			set_result.nombre_persona &
+			set_result.apellidos_persona &
 			set_result.nuevo_foto_persona;
 
 		// convert the result to boolean
@@ -203,12 +249,40 @@ class persona extends Validations {
 		}
 	}
 
+	/**********************************************************************************************
+		fields validations for EDIT
+	***********************************************************************************************/
+
+	EDIT_dni_validation() {
+		return this.ADD_dni_validation();
+	}
+
+	EDIT_apellidos_persona_validation() {
+		return this.ADD_apellidos_persona_validation();
+	}
+
 	EDIT_nombre_persona_validation() {
 		return this.ADD_nombre_persona_validation();
 	}
 
+	EDIT_fechaNacimiento_persona_validation() {
+		return this.ADD_fechaNacimiento_persona_validation();
+	}
+
+	EDIT_direccion_persona_validation() {
+		return this.ADD_direccion_persona_validation();
+	}
+
+	EDIT_telefono_persona_validation() {
+		return this.ADD_telefono_persona_validation();
+	}
+
+	EDIT_email_persona_validation() {
+		return this.ADD_email_persona_validation();
+	}
+
 	EDIT_nuevo_foto_persona_validation() {
-		if (!this.not_exist_file("nuevo_foto_persona")) {
+		if (!this.exist_file("nuevo_foto_persona")) {
 			this.dom.mostrar_exito_campo("nuevo_foto_persona");
 			return true;
 		}
@@ -235,5 +309,41 @@ class persona extends Validations {
 		}
 		this.dom.mostrar_exito_campo("nuevo_foto_persona");
 		return true;
+	}
+
+	/**********************************************************************************************
+		fields validations for SEARCH
+	***********************************************************************************************/
+
+	SEARCH_dni_validation() {
+		return this.ADD_dni_validation();
+	}
+
+	SEARCH_apellidos_persona_validation() {
+		return this.ADD_apellidos_persona_validation();
+	}
+
+	SEARCH_nombre_persona_validation() {
+		return this.ADD_nombre_persona_validation();
+	}
+
+	SEARCH_fechaNacimiento_persona_validation() {
+		return this.ADD_fechaNacimiento_persona_validation();
+	}
+
+	SEARCH_direccion_persona_validation() {
+		return this.ADD_direccion_persona_validation();
+	}
+
+	SEARCH_telefono_persona_validation() {
+		return this.ADD_telefono_persona_validation();
+	}
+
+	SEARCH_email_persona_validation() {
+		return this.ADD_email_persona_validation();
+	}
+
+	SEARCH_nuevo_foto_persona_validation() {
+		return this.ADD_nuevo_foto_persona_validation();
 	}
 }
