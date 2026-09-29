@@ -5,8 +5,8 @@ const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 
-const ENTREGA = "1"
-const GRUPO = "IU262722"
+const ENTREGA = "1";
+const GRUPO = "IU262722";
 
 const CARPETA_ENTREGA = "ET" + ENTREGA + "_" + GRUPO;
 const CARPETA_TESTS = "app";
