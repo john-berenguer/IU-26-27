@@ -1,4 +1,4 @@
-class Accion extends Validations {
+class accion extends Validations {
     constructor() {
     }
 }

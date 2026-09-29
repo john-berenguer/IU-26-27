@@ -1,4 +1,4 @@
-class Funcionalidad extends Validations {
+class funcionalidad extends Validations {
     constructor() {
     }
 }

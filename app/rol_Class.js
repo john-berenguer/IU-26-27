@@ -1,3 +1,3 @@
-class Rol extends Validations {
+class rol extends Validations {
     
 }
