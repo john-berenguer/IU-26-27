@@ -21,7 +21,7 @@ class rol extends Validations {
 		}
 	}
 
-
+    
 	/**
 	 * creates a variable with a form for a particular entity menu
 	 * @returns a variable with the form definition
@@ -71,11 +71,11 @@ class rol extends Validations {
 			this.dom.mostrar_error_campo("id_rol", "id_rol_max_size_ko");
 			return "id_rol_max_size_ko";
 		}
-		if (!this.format("id_rol", "^[0-9]*$")) {
+        if (!this.format("id_rol", "^[0-9]*$")) {
 			this.dom.mostrar_error_campo(
 				"id_rol",
 				"id_rol_format_ko",
-			);
+		    );
 			return "id_rol_format_ko";
 		}
 
@@ -125,8 +125,9 @@ class rol extends Validations {
 			);
 			return "rol_description_max_size_ko";
 		}
-		if (!this.format("rol_description", "/^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ\s,.;:¿?¡!'\-]+$/")) {
-			"rol_description",
+		if (!this.format("rol_description", "^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ\\s,.;:¿?¡!'\\-]+$")) {
+			this.dom.mostrar_error_campo(
+				"rol_description",
 				"rol_description_format_ko",
 			);
 			return "rol_description_format_ko";
@@ -135,7 +136,6 @@ class rol extends Validations {
 		return true;
 	}
 
-	error_rol_id
 	ADD_submit_rol() {
 		// object to store de fields validations
 		var set_result = {};
@@ -145,19 +145,15 @@ class rol extends Validations {
 		set_result.rol_name = this.ADD_rol_name_validation();
 		set_result.rol_description = this.ADD_rol_description_validation();
 
-
 		// calculate combination of all field validations
 		let result =
-			set_result.id_rol &
-			set_result.rol_name &
-			set_result.rol_description
-
-		// convert the result to boolean
-		result = Boolean(result);
+			set_result.id_rol === true &&
+			set_result.rol_name === true &&
+			set_result.rol_description === true;
 
 		// if boolean and true return true
-		if (typeof result === "boolean" && result == true) {
-			return result;
+		if (result === true) {
+			return true;
 		} // if not boolean or false return the object with id element as key and code error as value
 		else {
 			return set_result;
